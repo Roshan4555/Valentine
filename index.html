@@ -13,7 +13,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-    background: radial-gradient(circle at top, #1a001a, #4b004b, #000);
+    background: radial-gradient(circle at top, #000000, #4b004b, #1a001a);
     color: white;
     text-align: center;
     overflow-x: hidden;
@@ -42,15 +42,16 @@ body {
 
 h1 {
     font-family: 'Great Vibes', cursive;
-    font-size: 3.5em;
+    font-size: 3.8em;
     margin-top: 20px;
+    text-shadow: 0 0 20px rgba(255,0,150,0.9);
 }
 
 .photo {
     margin: 20px auto;
     max-width: 90%;
     border-radius: 20px;
-    box-shadow: 0 0 40px rgba(255,0,150,0.8);
+    box-shadow: 0 0 50px rgba(255,0,150,0.8);
 }
 
 .message {
@@ -67,7 +68,7 @@ button {
     padding: 14px 28px;
     border: none;
     border-radius: 30px;
-    background: #ff4da6;
+    background: #ff1a8c;
     color: white;
     font-size: 1em;
     cursor: pointer;
@@ -77,16 +78,15 @@ button {
 
 button:hover {
     transform: scale(1.1);
-    background: #ff1a8c;
+    background: #ff4da6;
 }
 
-/* Fireworks */
 .firework {
     position: fixed;
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    animation: explode 1s ease-out forwards;
+    animation: explode 1.2s ease-out forwards;
 }
 
 @keyframes explode {
@@ -100,8 +100,8 @@ button:hover {
 
 <body>
 
-<audio id="bgMusic" loop>
-<source src="https://www2.cs.uic.edu/~i101/SoundFiles/ILoveYou.mp3" type="audio/mpeg">
+<audio id="bgMusic">
+<source src="Tumhiho.mp3" type="audio/mpeg">
 </audio>
 
 <div class="overlay" id="introScreen">
@@ -139,7 +139,9 @@ Forever yours ❤️
 
 function startStory() {
     document.getElementById("introScreen").style.display = "none";
-    document.getElementById("bgMusic").play();
+    const music = document.getElementById("bgMusic");
+    music.volume = 1.0;
+    music.play();
     typeMessage();
 }
 
@@ -153,7 +155,7 @@ function typeMessage() {
         if (i < messageText.length) {
             container.innerHTML += messageText.charAt(i);
             i++;
-            setTimeout(typing, 40);
+            setTimeout(typing, 35);
         } else {
             document.getElementById("yesBtn").style.display = "inline-block";
         }
@@ -163,20 +165,22 @@ function typeMessage() {
 
 function sayYes() {
     launchFireworks();
-    alert("Picture abhi baaki hai mere dost... 💍❤️ Forever begins now!");
+    setTimeout(() => {
+        alert("Hum tere bin ab reh nahi sakte... 💍❤️ Forever begins now!");
+    }, 500);
 }
 
 function launchFireworks() {
-    for (let i = 0; i < 120; i++) {
+    for (let i = 0; i < 150; i++) {
         const firework = document.createElement("div");
         firework.classList.add("firework");
         firework.style.background = "hsl(" + Math.random()*360 + ",100%,50%)";
         firework.style.left = Math.random() * window.innerWidth + "px";
         firework.style.top = Math.random() * window.innerHeight + "px";
-        firework.style.setProperty('--x', (Math.random() - 0.5) * 300 + "px");
-        firework.style.setProperty('--y', (Math.random() - 0.5) * 300 + "px");
+        firework.style.setProperty('--x', (Math.random() - 0.5) * 350 + "px");
+        firework.style.setProperty('--y', (Math.random() - 0.5) * 350 + "px");
         document.body.appendChild(firework);
-        setTimeout(() => { firework.remove(); }, 1000);
+        setTimeout(() => { firework.remove(); }, 1200);
     }
 }
 </script>
